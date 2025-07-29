@@ -50,11 +50,12 @@
 
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue';
-import { Notyf } = require('notyf');
+import { Notyf } from 'notyf'; // Corrected import syntax
 import 'notyf/notyf.min.css';
 
 const notyf = new Notyf();
-const WEB3FORMS_ACCESS_KEY = "046edb61-d16d-42ce-87b7-aa1eac00974a";
+// Ensure this WEB3FORMS_ACCESS_KEY is correct for your Web3Forms account
+const WEB3FORMS_ACCESS_KEY = "046edb61-d16d-42ce-87b7-aa1eac00974a"; // Kept as provided
 
 const subject = "New message from portfolio contact form";
 
@@ -68,7 +69,7 @@ const isLoading = ref(false);
  * reCAPTCHA Integration
  */
 // Replace with your actual reCAPTCHA Site Key from Google reCAPTCHA admin panel
-const SITE_KEY = '6Ld_1pIrAAAAALPW69G0F4We4DrPqUJFm50njgT0'; 
+const SITE_KEY = '6Ld_1pIrAAAAALPW69G0F4We4DrPqUJFm50njgT0'; // Kept as provided
 
 const recaptchaContainer = ref(null);
 const recaptchaWidgetId = ref(null);
@@ -113,9 +114,11 @@ function resetRecaptcha() {
 // submitForm() handler function sends the form data to web3forms and displays notifications.
 const submitForm = async () => {
     // Check if reCAPTCHA has been verified
-    // if (!recaptchaToken.value) { // <-- This line and the block below it are commented out
-    //     notyf.error('Please verify that you are not a robot.');
-    //     return; // Stop form submission
+    // This client-side check is commented out to allow sending with Web3Forms Free Tier.
+    // If you enable this, you must upgrade Web3Forms or use a different service for reCAPTCHA verification.
+    // if (!recaptchaToken.value) {
+    //    notyf.error('Please verify that you are not a robot.');
+    //    return; // Stop form submission
     // }
 
     isLoading.value = true; // Set loading state to true
@@ -133,7 +136,9 @@ const submitForm = async () => {
                 email: email.value,
                 message: message.value,
                 // Include reCAPTCHA token in the submission if Web3Forms supports it directly
-                // 'g-recaptcha-response': recaptchaToken.value // <-- This line is commented out
+                // This line is commented out because Web3Forms Free Tier does NOT support reCAPTCHA.
+                // Sending it causes the "Pro feature" error.
+                // 'g-recaptcha-response': recaptchaToken.value
             }),
         });
         const result = await response.json();
