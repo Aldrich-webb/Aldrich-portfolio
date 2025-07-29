@@ -69,7 +69,7 @@ const isLoading = ref(false);
  * reCAPTCHA Integration
  */
 // Replace with your actual reCAPTCHA Site Key from Google reCAPTCHA admin panel
-const SITE_KEY = '6LdctZIrAAAAAJzqzn82ZRD_ubEpIUPmXHiWgRUr'; 
+const SITE_KEY = '6Ld_1pIrAAAAALPW69G0F4We4DrPqUJFm50njgT0'; 
 
 const recaptchaContainer = ref(null);
 const recaptchaWidgetId = ref(null);
