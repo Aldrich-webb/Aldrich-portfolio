@@ -113,15 +113,15 @@ function resetRecaptcha() {
 
 // submitForm() handler function sends the form data to web3forms and displays notifications.
 const submitForm = async () => {
-    // Check if reCAPTCHA has been verified
-    // This client-side check is commented out to allow sending with Web3Forms Free Tier.
-    // If you enable this, you must upgrade Web3Forms or use a different service for reCAPTCHA verification.
+    // This client-side check for reCAPTCHA token is commented out.
+    // Web3Forms Free Tier does not support reCAPTCHA verification,
+    // so we allow the form to send even without a client-side verified token.
     // if (!recaptchaToken.value) {
     //     notyf.error('Please verify that you are not a robot.');
-    //     return; // Stop form submission
+    //     return;
     // }
 
-    isLoading.value = true; // Set loading state to true
+    isLoading.value = true;
     try {
         const response = await fetch("https://api.web3forms.com/submit", {
             method: "POST",
@@ -135,10 +135,9 @@ const submitForm = async () => {
                 name: name.value,
                 email: email.value,
                 message: message.value,
-                // Include reCAPTCHA token in the submission if Web3Forms supports it directly
-                // This line is commented out because Web3Forms Free Tier does NOT support reCAPTCHA.
-                // Sending it causes the "Pro feature" error.
-                // 'g-recaptcha-response': recaptchaToken.value
+                // The 'g-recaptcha-response' field is commented out because Web3Forms's Free Tier
+                // does not support reCAPTCHA verification and will reject submissions with it.
+                // 'g-recaptcha-response': recaptchaToken.value // <-- This line should be commented or removed
             }),
         });
         const result = await response.json();
@@ -146,7 +145,6 @@ const submitForm = async () => {
         if (result.success) {
             console.log(result);
             notyf.success("Message Sent!");
-            // Clear form fields on success
             name.value = '';
             email.value = '';
             message.value = '';
@@ -158,8 +156,10 @@ const submitForm = async () => {
         console.error("Error submitting form:", error);
         notyf.error("An error occurred while sending your message.");
     } finally {
-        isLoading.value = false; // Reset loading state
-        resetRecaptcha(); // Reset reCAPTCHA widget (this is fine even if not strictly verified by Web3Forms)
+        isLoading.value = false;
+        // The reCAPTCHA widget can still be reset for visual consistency if desired,
+        // even if Web3Forms is not verifying it.
+        resetRecaptcha();
     }
 };
 
