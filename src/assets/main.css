@@ -1,0 +1,74 @@
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+/* Remove the placeholder font rule */
+/* .open-sans-<uniquifier> {
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" <width>;
+} */
+
+/* Global section padding and border */
+section {
+  padding: 80px 0;
+  border-bottom: 1px solid #e9ecef;
+}
+
+section:last-of-type {
+  border-bottom: none;
+}
+
+/* Global heading style */
+h2 {
+  font-weight: 700;
+  color: #007bff;
+  margin-bottom: 40px;
+  text-align: center;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background-color: #007bff;
+  border-radius: 2px;
+}
+
+/* Custom Primary Button Style (used in Landing and Contact) */
+.btn-primary-custom {
+  background-color: #fff;
+  color: #007bff;
+  border: 2px solid #fff;
+  padding: 12px 30px;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary-custom:hover {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+}
+
+/* Responsive adjustments for headings/sections */
+@media (max-width: 768px) {
+  section {
+    padding: 50px 0;
+  }
+  h2 {
+    margin-bottom: 30px;
+  }
+}
